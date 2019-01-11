@@ -5,22 +5,25 @@ using System.Threading.Tasks;
 
 namespace MobileTower.DAL.Repository
 {
-    public interface IRepository<T>
+    public interface IRepository<TEntity>
     {
-        T Add(T newItem);
+        TEntity Get(int id);
 
-        void Delete(T entity);
+        Task<TEntity> GetByIdAsync(int id);
 
-        T FindById(int id);
+        Task<IEnumerable<TEntity>> GetAllAsync();
 
-        Task<T> FindByIdAsync(int id);
-
-        Task<IEnumerable<T>> GetAllAsync();
+        IEnumerable<TEntity> GetAll();
 
 
-        IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
-        Task<T> UpdateAsync(int id, T itemToUpdate);
 
+        TEntity Add(TEntity newItem);
+
+        IEnumerable<TEntity> AddRange(IEnumerable<TEntity> newEntities);
+        TEntity Remove(TEntity entity);
+
+        IEnumerable<TEntity> RemoveRange(IEnumerable<TEntity> entitiesToRemove);
     }
 }

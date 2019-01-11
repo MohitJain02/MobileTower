@@ -1,5 +1,4 @@
-﻿using MobileTower.DAL.DBContext;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,52 +7,62 @@ using System.Threading.Tasks;
 
 namespace MobileTower.DAL.Repository
 {
-    public class Repository<T> : IRepository<T>
-        where T : class
+    public class Repository<TEntity> : IRepository<TEntity>
+        where TEntity : class
     {
-        private MobileTowerDbContext _dbContext;
-        DbSet<T> _dbSet;
+        protected readonly DbContext Context;
+        DbSet<TEntity> _dbSet;
 
-        public Repository(MobileTowerDbContext mobileTowerDbContext)
+        public Repository(DbContext dbContext)
         {
-            _dbContext = mobileTowerDbContext;
-            _dbSet = _dbContext.Set<T>();
-        }
-  
-        public T Add(T newItem)
-        {
-           return _dbSet.Add(newItem);
+            Context = dbContext;
+            _dbSet = Context.Set<TEntity>();
         }
 
-        public void Delete(T entity)
-        {
-            _dbSet.Remove(entity);
-        }
-
-        public T FindById(int id)
+        public TEntity Get(int id)
         {
             return _dbSet.Find(id);
-
         }
 
-        public async Task<T> FindByIdAsync(int id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public Task<T> UpdateAsync(int id, T itemToUpdate)
+        public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbSet.ToList();
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return _dbSet.Where(predicate);
         }
+
+        public TEntity Add(TEntity newItem)
+        {
+           return _dbSet.Add(newItem);
+        }
+
+        public IEnumerable<TEntity> AddRange(IEnumerable<TEntity> newEntities)
+        {
+            return _dbSet.AddRange(newEntities);
+        }
+
+        public TEntity Remove(TEntity entity)
+        {
+            return _dbSet.Remove(entity);
+        }
+
+        public IEnumerable<TEntity> RemoveRange(IEnumerable<TEntity> entitiesToRemove)
+        {
+            return _dbSet.RemoveRange(entitiesToRemove);
+        }
+
     }
 }

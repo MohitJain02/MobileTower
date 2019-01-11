@@ -1,27 +1,30 @@
-﻿using System;
+﻿using log4net;
 
 namespace MobileTower.Infrastructure.Logging
 {
     public sealed class Logger : ILogger
     {
+        private static readonly ILog log =
+            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public void Debug(object message)
         {
-            throw new NotImplementedException();
+            log.Debug(message);
         }
 
         public void Error(object message)
         {
-            throw new NotImplementedException();
+            log.Error(message);
         }
 
         public void LogInfo(object message)
         {
-            throw new NotImplementedException();
+            log.Info(message);
         }
 
         public void LogWarning(object message)
         {
-            throw new NotImplementedException();
+            log.Warn(message);
         }
     }
 }
