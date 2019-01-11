@@ -1,7 +1,7 @@
 ﻿using log4net;
 using log4net.Config;
 
-namespace MobileTower.Infrastructure.Logging
+namespace Test.Logging
 {
     public sealed class Logger : ILogger
     {

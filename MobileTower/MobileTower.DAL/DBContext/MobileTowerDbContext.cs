@@ -21,16 +21,5 @@ namespace MobileTower.DAL.DBContext
         {
             base.OnModelCreating(modelBuilder);
         }
-
-        public override int SaveChanges()
-        {
-            return base.SaveChanges();
-        }
-
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
     }
 }

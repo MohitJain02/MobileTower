@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="IocContainer\" />
     <Folder Include="ApplicationExceptions\" />
     <Folder Include="Constants\" />
     <Folder Include="Enums\" />
@@ -13,7 +12,6 @@
 
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="Unity" Version="5.8.13" />
   </ItemGroup>
 
 </Project>
