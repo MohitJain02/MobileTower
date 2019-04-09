@@ -15,9 +15,7 @@ namespace MobileTower.DAL.Repository
 
         IEnumerable<TEntity> GetAll();
 
-
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
-
 
         TEntity Add(TEntity newItem);
 
